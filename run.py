@@ -12,7 +12,10 @@ app = Flask(__name__)
 RSS_FEEDS = {'bbc': 'http://feeds.bbci.co.uk/news/rss.xml',
 		'cnn': 'http://rss.cnn.com/rss/edition.rss',
 		'fox': 'http://feeds.foxnews.com/foxnews/latest',
-		'iol': 'http://www.iol.co.za/cmlink/1.640'}
+		'iol': 'http://www.iol.co.za/cmlink/1.640',
+		'cah': 'http://calgaryherald.com/feed/',
+		'cbcc': 'http://www.cbc.ca/cmlink/rss-canada-calgary',
+		'wcal': 'http://rss.theweathernetwork.com/weather/caab0049'}
 
 DEFAULTS = {'publication':'bbc',
 		'city': 'London,UK',
@@ -79,6 +82,7 @@ def get_rate(frm, to):
 	to_rate = parsed.get(to.upper())
 	return (to_rate / frm_rate, parsed.keys())
 
+# Get explicit changes first, then cookies, then default if none of the preceeding
 def get_value_with_fallback(key):
 	if request.args.get(key):
 		return request.args.get(key)
